@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router(); 
 const mongoose = require('mongoose');
-const cloudinary = require('cloudinary').v2
-const multer = require('multer')
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const fs = require('fs');
 const Post = require('../models/post');
 
 const upload = multer({ dest: 'uploads/'});
@@ -54,6 +55,9 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
                 imageurl: ['png', 'jepg', 'jpg'].includes(req.file.originalname.split('.')[1]) ? mediaurl.secure_url : '',
                 videourl: ['mp4'].includes(req.file.originalname.split('.')[1]) ? mediaurl.secure_url:''
             });
+           
+            fs.unlinkSync(path)
+            
             post.save((err, user) => {
                 if (err) return next(err)
                 res.status(200).json({

@@ -7,8 +7,9 @@ const cors = require('cors');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
 const postRoutes = require('./routes/post');
-
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+require('dotenv').config();
+console.log("env", process.env.MONGO_URI)
+//mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
  //middleWares
 app.use(morgan('dev'));

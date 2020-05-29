@@ -1,0 +1,8 @@
+{
+    "env":{
+        "MONGO_URI":"mongodb+srv://dverybest:@bombom32@cluster0-yzhd0.mongodb.net/test?retryWrites=true&w=majority",
+        "cloud_name": "dwdfhahjx",
+        "api_key": 566497113557387,
+        "api_secret":"GtUpfcIZrCBOEq9vW88uPJT4ZbE"
+    }
+}

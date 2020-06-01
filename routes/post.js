@@ -23,7 +23,7 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
     // let imageurl="";
     // let videourl ='';
     //req.file.mimetype=="video/mp4"?
-    // console.log(req.file);
+     console.log('file',req.file);
    // return res.status(200).json({ data: req.file, body: req.body})
     cloudinary.config({
         cloud_name: process.env.cloud_name,
@@ -46,8 +46,9 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
     cloudinary.uploader.upload(req.file.path,data,
         (err,mediaurl)=>{
             
+            console.log('errg',err)
             if (err) return next(err);
-        
+            
             const post = new Post({
                 title: title,
                 content: content,
@@ -58,11 +59,11 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
            
             fs.unlinkSync(path)
             
-            post.save((err, user) => {
+            post.save((err, data) => {
                 if (err) return next(err)
                 res.status(200).json({
-                    message: 'User Created Sucessfully',
-                    user: user,
+                    message: 'Recipe Added Sucessfully',
+                    user: data,
                     success: true
                 });
             });

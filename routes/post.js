@@ -47,7 +47,6 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
         (err,mediaurl)=>{
             
             console.log('errg',err)
-            if (err) return next(err);
             
             const post = new Post({
                 title: title,
@@ -57,7 +56,7 @@ router.post('/addpost', upload.single('mediafile'), (req, res, next)=>{
                 videourl: ['mp4'].includes(req.file.originalname.split('.')[1]) ? mediaurl.secure_url:''
             });
            
-            fs.unlinkSync(path)
+            fs.unlinkSync(req.file.path)
             
             post.save((err, data) => {
                 if (err) return next(err)
